@@ -9,6 +9,7 @@ self.addEventListener("fetch", (event) => {
   // Логируем URL запроса
   console.log(`[Service Worker] Intercepted request to: ${url}`);
 
+  if (!url.includes("posts")) return;
   // Прерываем запрос, возвращая ошибку 403 или пустой ответ
   // Если нужно блокировать только определенные URL, добавьте if (url.includes(...))
   event.respondWith(
