@@ -13,15 +13,13 @@ self.addEventListener("fetch", (event) => {
   // Логируем URL запроса
   console.log(`[Service Worker] Intercepted request to: ${url}`);
 
-  if (!url.includes("posts")) return;
-  // Прерываем запрос, возвращая ошибку 403 или пустой ответ
-  // Если нужно блокировать только определенные URL, добавьте if (url.includes(...))
-  event.respondWith(
-    new Response("Request blocked by Service Worker", {
-      status: 403,
-      statusText: "Forbidden",
-    }),
-  );
+  if (url.includes("posts"))
+    event.respondWith(
+      new Response('{"error": "Request blocked by Service Worker"}', {
+        status: 403,
+        statusText: "Forbidden",
+      }),
+    );
 });
 
 // Обязательно для работы плагина
